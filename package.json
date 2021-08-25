@@ -1,0 +1,14 @@
+{
+  "name": "inttest",
+  "version": "1.0.0",
+  "description": "Interview coding test",
+  "main": "squares.js",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  },
+  "scripts": {
+    "test": "./node_modules/jest/bin/jest.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
