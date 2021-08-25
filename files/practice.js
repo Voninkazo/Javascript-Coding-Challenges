@@ -8,7 +8,27 @@
 //   })
 // }
 
+//
 // square()
+
+const setAnswerOptionsCallback = (original, current) => {
+  const originWithoutCurrent = original.filter((phr) => phr.id !== current.id)
+
+  const phraseCategoryId = categories.find((cat) =>
+    cat.phrasesIds.includes(current?.id)
+  )
+
+  const allNewPhrases = getPhrasesForCategoryId(phraseCategoryId?.id)
+  const removeDuplicateItem = allNewPhrases.filter(
+    (phr) => phr.id !== current.id
+  )
+  const randomFromAll = shuffleArray(
+    seenPhrases || learntPhrases ? removeDuplicateItem : originWithoutCurrent
+  ).slice(0, 3)
+
+  let randomWithCorrect = shuffleArray([...randomFromAll, current])
+  setAnswerOptions(randomWithCorrect)
+}
 
 function square() {
   return 'xxx' + '\n' + 'xxx' + '\n' + 'xxx'
@@ -109,9 +129,30 @@ function unlimitedSquare(length) {
       return newArrOfSingleChar
     }
     // Get the middle item and change them into 'o'by calling the function that's declared above
-    return index === 0 || index === arrOfMultipleChar.length - 1 ? char : changeStr()
+    return index === 0 || index === arrOfMultipleChar.length - 1
+      ? char
+      : changeStr()
   })
   // join the array with new lines
   return arrWithChangedInnerChar.join('\n')
 }
 console.log(unlimitedSquare(10))
+//
+
+function getSquare(size, borderChar, contentsChar) {
+  let output = ''
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
+      if (i == 0 || i == size - 1 || j == 0 || j == size - 1) {
+        output += borderChar
+      } else {
+        output += contentsChar
+      }
+    }
+    output += '\n'
+  }
+  return output
+}
+
+let o = getSquare(5, 'x', 'o')
+console.log(o)
